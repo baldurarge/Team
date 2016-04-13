@@ -1,0 +1,77 @@
+<template name="Lobby">
+    <div class="lobby-list col-lg-6">
+        {{#if Template.subscriptionsReady}}
+                <ul class="list-group">
+                    {{#each lobby.users}}
+                        <li class="list-group-item">
+                            <h4>{{getName this}}</h4>
+                            {{#if isYou this}}
+                            {{else}}
+                                proifle,message
+                                {{#if leader}}
+                                    kick
+                                {{/if}}
+                            {{/if}}
+                        </li>
+                    {{/each}}
+                </ul>
+            <button class="btn btn-lg create-a-lobby">Create A Lobby</button>
+            <button class="btn btn-lg start-looking">Start Looking For A Game</button>
+        {{/if}}
+    </div>
+    <div class="col-lg-6">
+        {{#if lobby}}
+            <h4 class="text-center">Lobby Chat</h4>
+            <div class="lobby-chat">
+                {{#each lobby.messages}}
+                    <p>{{this.message}}</p>
+                {{/each}}
+            </div>
+            <form action="" class="new-lobby-message">
+                <input type="text" name="text" class="form-control send-lobby-message" placeholder="message">
+            </form>
+        {{/if}}
+    </div>
+    <div class="col-lg-12">
+        {{#if lobby}}
+            <button type="button" class="invite-friends" data-toggle="modal" data-target="#myModal">Invite Friends</button>
+            <button class="start-searching">Start Game</button>
+            <button class="delete-lobby">Close this Lobby</button>
+        {{/if}}
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Invite To Lobby</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {{#each currentUser.friendsList}}
+                            {{#if equals this.status "10"}}
+                                {{#if getFriendStatus this.id}}
+                                    <li class="list-group-item">
+                                        <label>
+                                            <input type="checkbox" value="{{this.id}}">{{getFriendName this.id}}
+                                        </label>
+                                    </li>
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary send-invites">Send invites</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

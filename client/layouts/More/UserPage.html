@@ -1,0 +1,43 @@
+<template name="UserPage">
+    {{#each user}}
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h2>{{profile.fName}} {{profile.lName}}</h2>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="col-lg-12">
+                        <img src="https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg" alt="img" class="img-circle">
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-3 panel-button">
+                        {{#if equals currentUser._id _id}}
+                            <button class="btn btn-block editAccountBtn">Edit Account Info</button>
+                        {{else}}
+                            {{#if equals getThisFriendStatus 0}}
+                                <button class="btn btn-block pendingBtn">Friend Request Pending</button>
+                            {{/if}}
+                            {{#if equals getThisFriendStatus 1}}
+                                <button class="btn btn-block acceptFriendRequest">Accept friend Request</button>
+                                <button class="btn btn-block declineFriendRequest">Decline friend Request</button>
+                            {{/if}}
+                            {{#if equals getThisFriendStatus 10}}
+                                <button class="btn btn-block removeFriend">Remove Friend</button>
+                            {{/if}}
+                            {{#if equals getThisFriendStatus "NOSTATUS"}}
+                                <button class="btn btn-block friendRequestBtn">Send Friend Request</button>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <p>Something went wrong</p>
+    {{/each}}
+    <div class="col-lg-3 pull-right">
+        {{>TopMenu}}
+    </div>
+    <div class="col-lg-2 pull-right">
+        {{>FriendsList}}
+    </div>
+</template>

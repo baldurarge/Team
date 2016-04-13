@@ -1,0 +1,11 @@
+<template name="MainLayout">
+    <main class="main-layout">
+        <div id="wrapper">
+            {{>SideGames}}
+            <div id="page-content-wrapper">
+                {{>Hamburger}}
+                {{>Template.dynamic template=main}}
+            </div>
+        </div>
+    </main>
+</template>
