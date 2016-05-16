@@ -30,3 +30,5 @@ Meteor.methods({
         Lobbys.update({_id:lobbyId},{$push:{messages:{senderId:this.userId,message:text}}});
     }
 });
+
+//TESTER
