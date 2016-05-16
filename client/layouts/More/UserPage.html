@@ -1,43 +1,127 @@
 <template name="UserPage">
-    {{#each user}}
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <h2>{{profile.fName}} {{profile.lName}}</h2>
-                </div>
-                <div class="panel-body text-center">
-                    <div class="col-lg-12">
-                        <img src="https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg" alt="img" class="img-circle">
-                    </div>
-                    <div class="col-lg-6 col-lg-offset-3 panel-button">
-                        {{#if equals currentUser._id _id}}
-                            <button class="btn btn-block editAccountBtn">Edit Account Info</button>
-                        {{else}}
-                            {{#if equals getThisFriendStatus 0}}
-                                <button class="btn btn-block pendingBtn">Friend Request Pending</button>
-                            {{/if}}
-                            {{#if equals getThisFriendStatus 1}}
-                                <button class="btn btn-block acceptFriendRequest">Accept friend Request</button>
-                                <button class="btn btn-block declineFriendRequest">Decline friend Request</button>
-                            {{/if}}
-                            {{#if equals getThisFriendStatus 10}}
-                                <button class="btn btn-block removeFriend">Remove Friend</button>
-                            {{/if}}
-                            {{#if equals getThisFriendStatus "NOSTATUS"}}
-                                <button class="btn btn-block friendRequestBtn">Send Friend Request</button>
-                            {{/if}}
-                        {{/if}}
+    <div class="col-lg-9 col-lg-offset-1 the-user-info">
+
+        {{#if Template.subscriptionsReady}}
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active user-info-tab"><a href="">User Info</a></li>
+                {{#if equals currentUser._id getParam}}
+                    <li role="presentation" class="change-info-tab"><a href="">Change Info</a></li>
+                {{/if}}
+            </ul>
+            <div class="user-info">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object dp img-circle" src="{{user.profile.imgLoc}}" style="width: 100px;height:100px;">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{user.profile.fName}} {{user.profile.lName}}</h4>
+                        <h4>{{user.profile.userName}}</h4>
                     </div>
                 </div>
             </div>
-        </div>
-    {{else}}
-        <p>Something went wrong</p>
-    {{/each}}
-    <div class="col-lg-3 pull-right">
-        {{>TopMenu}}
-    </div>
-    <div class="col-lg-2 pull-right">
-        {{>FriendsList}}
+            {{#if equals currentUser._id getParam}}
+                <div class="user-info-change hidden">
+                    <div class="col-lg-6">
+                        <h5>User Info</h5>
+                        <div class="panel panel-default user-info-change-panel">
+                            <div class="panel-body">
+                                <form action="">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">User Name</label>
+                                        <div class="col-sm-9">
+                                            <input id="update-user-name" type="text" placeholder="{{user.profile.userName}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">First Name</label>
+                                        <div class="col-sm-9">
+                                            <input id="update-first-name" type="text" placeholder="{{user.profile.fName}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">Last Name</label>
+                                        <div class="col-sm-9">
+                                            <input id="update-last-name" type="text" placeholder="{{user.profile.lName}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">Image Link</label>
+                                        <div class="col-sm-9">
+                                            <input id="update-image-link" type="text" placeholder="New Image Link" class="form-control">
+                                        </div>
+                                    </div>
+                                    <hr class="col-lg-11">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" placeholder="{{getEmail user}}" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="textinput">Email Verified</label>
+                                        <div class="col-sm-9 email-verified">
+                                            {{#if isEmailVerified user}}
+                                                <input type="text" placeholder="Verified" class="form-control is-verified" disabled>
+                                            {{else}}
+                                                <input type="text" placeholder="Not Verified" class="form-control not-verified">
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-lg-offset-1">
+                        <h5>Password Change</h5>
+                        <div class="panel panel-default user-info-change-panel">
+                            <div class="panel-body">
+                                <form action="">
+                                    <div class="form-group">
+                                        <label for="old-password" class="col-lg-5">Old Password</label>
+                                        <div class="col-lg-7">
+                                            <input id="update-old-password" type="password" class="form-control" placeholder="Old Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="old-password" class="col-lg-5">New Password</label>
+                                        <div class="col-lg-7">
+                                            <input id="update-password" type="password" class="form-control" placeholder="New Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="old-password" class="col-lg-5">New Password Again</label>
+                                        <div class="col-lg-7">
+                                            <input id="update-password-again" type="password" class="form-control" placeholder="New Password Again">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <h5>Additional Info</h5>
+                        <div class="panel panel-default user-info-change-panel">
+                            <div class="panel-body">
+                                <form action="">
+                                    <div class="form-group">
+                                        <label for="old-password" class="col-lg-5">Twitch Name</label>
+                                        <div class="col-lg-7">
+                                            <input id="update-twitch" type="text" class="form-control" placeholder="Twitch">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <hr>
+                        <div class="btn btn-lg pull-right">Cancel</div>
+                        <div class="btn btn-lg pull-right button-save-changes">Save Changes</div>
+                    </div>
+
+                </div>
+            {{/if}}
+        {{/if}}
     </div>
 </template>

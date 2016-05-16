@@ -1,0 +1,20 @@
+<template name="Lobby2">
+    {{#if Template.subscriptionsReady}}
+        {{#if lobby}}
+            <div class="col-lg-3 theLobby">
+                <ul>
+                    <li class="devider">The Lobby</li>
+                    {{#each lobby.users}}
+                        <li class="eachLobbyPerson">
+                            <img class="lobbyPersonImage" src="https://discussions.apple.com/people/planb77/avatar/68.png?a=1914"><span>Name asdasd</span>
+                            <a href="" class="pull-right">Leave</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="btn btn-lg">Start Looking For A Game</div>
+        {{/if}}
+        <div class="btn btn-lg">Start Looking For A Game</div>
+        <div class="btn btn-lg createALobby">Create A Lobby</div>
+    {{/if}}
+</template>

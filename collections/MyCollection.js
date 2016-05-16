@@ -1,6 +1,19 @@
 Notifications = new Mongo.Collection('notifications');
 
 Meteor.methods({
+    updateUser:function(info){
+
+        for ( key in info ) {
+            var theKey = 'profile.'+key;
+            var object = {};
+            object[theKey] = info[key];
+            Meteor.users.update({'_id':this.userId},{$set:object});
+            console.log(object);
+        }
+    },
+    newPassword:function(info){
+
+    },
     addFriend:function(friendId){
         Meteor.users.update(friendId,{
             $push:{

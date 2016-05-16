@@ -167,90 +167,152 @@ html
 .form-login .btn
     background-color sky
 
+
+
+
+.mainLayoutContent
+    margin 0px
+    padding 0px
 /*----------------------------------HOME*/
+.TopNavBar
+    background-color #14a29e
+    color white
+    box-shadow: 0px 3px 5px #888888;
+    z-index 100
 
-/*
-.game-main
-    border-style solid 1px
+.top-menu-nav
+    margin-top 3px
 
-.friends
-    font-size 17px
+.nav.navbar-nav.navbar-right a
+    color white
 
-.friend-request
-    color #00ff00
+.nav.navbar-nav.navbar-right a:focus
+    outline 0;
 
-.online-circle
-    color #00ff00
-    font-size 15px
+.nav.navbar-nav.navbar-right a:hover
+    background-color #0e9795
+    font-size larger
 
-.idle-circle
-    color #fffe00
-    font-size 15px
+.logout
+    margin-left 15px
 
-.offline-circle
-    color #ff000d
-    font-size 15px
 
-.each-friend
+/*------------------------LOBBY INFO-------------------*/
+.theLobby
+    background-color rgba(195, 195, 229, 0.2)
+    border-bottom-left-radius 1px
+    box-shadow: 1px 1px 5px #888888;
     list-style none
-    border-bottom solid 1px #dddddd
+    padding 0px
 
-.each-friend:hover
-    background-color #e8e8e8
+.theLobby ul, .theLobby li
+    list-style none
+    padding 0px
+
+.theLobby li
+    margin-top 4px
+
+
+.theLobby span
+    font-size 20px
+    color #767775
+    //color black
+    text-decoration none
+    margin-bottom 0em
+
+.theLobby a
+    margin-right 10px
+    font-size 15px
+    color #f25f5c
+
+.lobbyPersonImage
+    width 40px
+    border-radius: 50%;
+    margin-left 10px
+    margin-right 10px
+    margin-top 5px
+
+.theLobby .devider
+    background-color rgba(195,195,229,0.2)
+    text-align center
+
+/*------------------------USER INFO-------------------*/
+.the-user-info
+    margin-top 10px
+
+.user-info img
+    width 150px
+    border-radius 50%
+
+.user-info-change-panel
+    border-radius 0px
+
+.form-group label
+    font-size 12px
+
+.form-group input, .form-group label
+    margin-top 4px
+
+.form-group input
+    border-radius 0px
+
+.email-verified input[type="text"]:disabled
+    background-color #7eff00
+
+
+/* ---------------------------------- FRIENDS LIST! ---------------------*/
+.testFriendsList
+    background-color rgba(195, 195, 229, 0.2)
+    border-bottom-left-radius 1px
+    box-shadow: 1px 1px 5px #888888;
+    list-style none
+    padding 0px
+
+
+.testFriendsList ul, .testFriendsList li
+    list-style none
+    padding 0px
+
+.testFriendsList li:hover
+    background-color rgba(195,195,229,0.4)
     cursor pointer
 
-/*---------------------*/
-/*
-.user-stuff
-    height 50px
-    text-align right
+.testFriendsList .devider
+    background-color rgba(195,195,229,0.2)
+    text-align center
 
-.panel-default >.panel-heading
-    border-radius 0px
-    background-color driftwood
-
-
-.panel-body img
-    width 200px
-
-.friendRequestBtn, .acceptFriendRequest
-    margin-top 30px
-    background-color mist
-    border-radius 0px
-
-.declineFriendRequest
-    margin-top 20px
-    background-color rgba(255, 6, 0, 0.64)
-    border-radius 0px
-
-.declineFriendRequest:hover
-    background-color rgba(255, 6, 0, 0.75)
-
-.friendRequestBtn:hover, .acceptFriendRequest:hover
-    background-color skyblue
-
-.pendingBtn
-    margin-top 30px
-    background-color sunglow
-    border-radius 0px
+.testFriendsList .devider:hover
+    background-color rgba(195,195,229,0.2)
     cursor default
 
-.friendSearch
-    border-radius 0px
+.testFriendsList i
+    margin-top 5px
 
-.navbar-right
-    margin-right 4px
+.testFriendsList a
+    margin-left 55px
+    font-size 18px
+    color #F2583E
+    //color black
+    text-decoration none
+    margin-bottom 0em
 
-.navbar-right a
-    color black
-    font-size 17px
+.testFriendsList p
+    margin-left 55px
+    font-size 12px
+    color #8b8b8b
 
-.lobby-chat
-    overflow-y scroll
-    height 300px
+.friend-image
+    position fixed
+    width 35px
+    border-radius: 50%;
+    margin-left 10px
+    margin-right 10px
+    margin-top 5px
 
-*/
 
+
+
+/*-----------------------SIDE BAR NAV------------------------------------*/
 
 
 #wrapper {
@@ -430,7 +492,7 @@ html
     display: block;
     width: 100px;
     font-size: 14px;
-    color: #fff;
+    color: white;
     line-height: 32px;
     text-align: center;
     opacity: 0;
@@ -458,7 +520,7 @@ html
 .hamburger.is-closed .hamb-top,
 .hamburger.is-closed .hamb-middle,
 .hamburger.is-closed .hamb-bottom {
-    background-color: #1a1a1a;
+    background-color: white;
 }
 .hamburger.is-closed .hamb-top {
     top: 5px;
@@ -484,7 +546,7 @@ html
 .hamburger.is-open .hamb-top,
 .hamburger.is-open .hamb-middle,
 .hamburger.is-open .hamb-bottom {
-    background-color: #1a1a1a;
+    background-color: white;
 }
 .hamburger.is-open .hamb-top,
 .hamburger.is-open .hamb-bottom {
@@ -505,7 +567,7 @@ html
     display: block;
     width: 100px;
     font-size: 14px;
-    color: #fff;
+    color: white;
     line-height: 32px;
     text-align: center;
     opacity: 0;
@@ -532,6 +594,6 @@ html
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(250,250,250,.8);
+    background-color: rgba(0,0,0,.8);
     z-index: 1;
 }

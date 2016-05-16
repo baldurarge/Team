@@ -1,6 +1,5 @@
 UI.registerHelper('isItAFriend',function(id){
     var friend = Meteor.users.find({_id:id}).fetch();
-    console.log(currentUser);
     return "ASDASd";
 });
 
@@ -13,28 +12,58 @@ Template.UserPage.onCreated(function(){
 });
 
 Template.UserPage.helpers({
-    user:()=>{
+    user: function () {
         var userName = FlowRouter.getParam('id');
-        return Meteor.users.find({"profile.userName":userName}).fetch();
+        var x = Meteor.users.find({_id:userName}).fetch();
+        return x[0];
     }
 });
 
-UI.registerHelper('getThisFriendStatus',function(){
-    var found = false;
-    var friend = Meteor.users.find({$and:[{_id:Meteor.userId()},{'friendsList':{$exists:true}}]});
-    if(friend.count() > 0){
-        friend = friend.fetch();
-        for(var i = 0; i<friend[0].friendsList.length;i++){
-            if(friend[0].friendsList[i].id == this._id){
-                return friend[0].friendsList[i].status;
-            }
-        }
-    }else{
-        return "NOSTATUS";
-    }
+UI.registerHelper('getEmail',function(user){
+    return user.emails[0].address;
+});
+
+UI.registerHelper('isEmailVerified',function(user){
+    return user.emails[0].verified
+});
+
+UI.registerHelper('getParam',function(){
+    return FlowRouter.getParam('id');
 });
 
 Template.UserPage.events({
+    'click .change-info-tab':function(){
+        $('.user-info').addClass('hidden');
+        $('.user-info-change').removeClass('hidden');
+        $('.user-info-tab').removeClass('active');
+        $('.change-info-tab').addClass('active');
+    },
+    'click .user-info-tab':function(){
+        $('.user-info').removeClass('hidden');
+        $('.user-info-change').addClass('hidden');
+        $('.user-info-tab').addClass('active');
+        $('.change-info-tab').removeClass('active');
+    },
+    'click .button-save-changes':function(event, template){
+        event.preventDefault();
+        var info = {};
+        info.userName = template.find('#update-user-name').value;
+        info.fName = template.find('#update-first-name').value;
+        info.lName = template.find('#update-last-name').value;
+        info.imgLoc = template.find('#update-image-link').value;
+        info.oldPassword = template.find('#update-old-password').value;
+        info.newPassword = template.find('#update-password').value;
+        info.newPasswordAgain = template.find('#update-password-again').value;
+        info.twitch = template.find('#update-twitch').value;
+
+        $.each(info, function(key, value){
+            if (value === "" || value === null){
+                delete info[key];
+            }
+        });
+        Meteor.call('updateUser', info);
+        
+    },
     'click .friendRequestBtn': function(){
 
         Meteor.call('addFriend',this._id);

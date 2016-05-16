@@ -1,41 +1,42 @@
 <template name="SideGames">
-    <div class="overlay"></div>
-
-    <!-- Sidebar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-        <ul class="nav sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    RushMid
-                </a>
-            </li>
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Play Games<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Play</li>
-                    <li><a href="#">League Of Legends - Beta</a></li>
-                    <li><a href="#">CS GO - Coming Soon!</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitch Streams<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Streams</li>
-                    <li><a href="#">All</a></li>
-                    <li><a href="#">League Of Legends</a></li>
-                    <li><a href="#">CS GO</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /#sidebar-wrapper -->
+    <div class="col-lg-2">
+        <div class="overlay"></div>
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav sider-naver">
+                <li class="sidebar-brand side-li">
+                    <a href="/home">
+                        RushMid
+                    </a>
+                </li>
+                <li class="side-li">
+                    <a href="/home">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Play Games<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Play</li>
+                        <li class="side-li"><a href="/games/lol">League Of Legends - Beta</a></li>
+                        <li class="side-li"><a href="/games/csgo">CS GO - Coming Soon!</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitch Streams<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Streams</li>
+                        <li class="side-li"><a href="/stream/all">All</a></li>
+                        <li class="side-li"><a href="/stream/lol">League Of Legends</a></li>
+                        <li class="side-li"><a href="/stream/csgo">CS GO</a></li>
+                        <li class="side-li"><a href="/stream/other">Other</a></li>
+                    </ul>
+                </li>
+                <li class="side-li">
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+    </div>
 </template>
 
 <template name="Hamburger">

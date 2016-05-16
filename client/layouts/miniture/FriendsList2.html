@@ -1,0 +1,27 @@
+<template name="FriendsListTwo">
+    {{#if Template.subscriptionsReady}}
+        <ul>
+            <li class="devider">Online</li>
+            {{#each friendsList}}
+                {{#if getFriendStatus this.id}}
+                    {{#if equals this.status "10"}}
+                        <li class="each-friend">
+                            <img class="friend-image" src="{{getFriendImg this.id}}"><a href="">{{getFriendName this.id}}</a><p>{{getFriendFullName this.id}}</p>
+                        </li>
+                    {{/if}}
+                {{/if}}
+            {{/each}}
+            <li class="devider">Offline</li>
+            {{#each friendsList}}
+                {{#if getFriendStatus this.id}}
+                {{else}}
+                    {{#if equals this.status "10"}}
+                        <li class="each-friend">
+                            <img class="friend-image" src="{{getFriendImg this.id}}"><a href="">{{getFriendName this.id}}</a><p>{{getFriendFullName this.id}}</p>
+                        </li>
+                    {{/if}}
+                {{/if}}
+            {{/each}}
+        </ul>
+    {{/if}}
+</template>

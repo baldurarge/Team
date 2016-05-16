@@ -12,7 +12,8 @@ Template.Register.events({
             profile:{
                 userName:userNameVar,
                 fName:fName,
-                lName:lName
+                lName:lName,
+                imgLoc:"http://simpleicon.com/wp-content/uploads/user1.png"
             }
         });
     }

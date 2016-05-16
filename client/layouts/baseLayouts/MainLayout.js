@@ -1,9 +1,15 @@
 Template.MainLayout.onRendered(function(){
     var trigger = $('.hamburger'),
+        liTrigger = $('.side-li'),
         overlay = $('.overlay'),
         isClosed = false;
 
     trigger.click(function () {
+        hamburger_cross();
+    });
+
+    liTrigger.click(function(){
+        $('#wrapper').toggleClass('toggled');
         hamburger_cross();
     });
 
