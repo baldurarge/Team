@@ -6,15 +6,56 @@
                     <li class="devider">The Lobby</li>
                     {{#each lobby.users}}
                         <li class="eachLobbyPerson">
-                            <img class="lobbyPersonImage" src="https://discussions.apple.com/people/planb77/avatar/68.png?a=1914"><span>Name asdasd</span>
-                            <a href="" class="pull-right">Leave</a>
+                            <img class="lobbyPersonImage" src="{{getImgLink this}}"><span>{{getName this}}</span>
+                            <a href="" class="leaveLobby pull-right">Leave</a>
                         </li>
                     {{/each}}
                 </ul>
+                <hr>
+                <a href="" class="inviteFriends" data-toggle="modal" data-target="#myModal">Invite Friends</a>
             </div>
+            <div class="btn btn-lg">Start Looking For A Game With Your Lobby</div>
+        {{else}}
             <div class="btn btn-lg">Start Looking For A Game</div>
+            <div class="btn btn-lg createALobby">Create A Lobby</div>
         {{/if}}
-        <div class="btn btn-lg">Start Looking For A Game</div>
-        <div class="btn btn-lg createALobby">Create A Lobby</div>
+
+
+
+
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title text-center" id="myModalLabel">Friend Invite</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group modalListGroup">
+                            {{#each currentUser.friendsList}}
+                                {{#if equals this.status "10"}}
+                                    {{#if getFriendStatus this.id}}
+                                        <li class="list-group-item">
+                                            <label>
+                                                <input type="checkbox" value="{{this.id}}"> {{getFriendName this.id}}
+                                            </label>
+                                        </li>
+                                    {{/if}}
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <h4 class="col-lg-2 col-lg-offset-7" data-dismiss="modal">Cancel</h4>
+                        <h4 class="col-lg-3 send-invites">Send Invites</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     {{/if}}
 </template>

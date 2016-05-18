@@ -1,6 +1,5 @@
 <template name="UserPage">
     <div class="col-lg-9 col-lg-offset-1 the-user-info">
-
         {{#if Template.subscriptionsReady}}
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active user-info-tab"><a href="">User Info</a></li>
@@ -8,16 +7,22 @@
                     <li role="presentation" class="change-info-tab"><a href="">Change Info</a></li>
                 {{/if}}
             </ul>
-            <div class="user-info">
+            <div class="user-info col-lg-6">
                 <div class="media">
-                    <a class="pull-left" href="#">
+                    <div class="pull-left" href="#">
                         <img class="media-object dp img-circle" src="{{user.profile.imgLoc}}" style="width: 100px;height:100px;">
-                    </a>
+                    </div>
                     <div class="media-body">
-                        <h4 class="media-heading">{{user.profile.fName}} {{user.profile.lName}}</h4>
-                        <h4>{{user.profile.userName}}</h4>
+                        <span class="name">Name: <span class="theName">{{user.profile.fName}} {{user.profile.lName}}</span></span>
+                        <span class="username">Username: <span class="theUserName">{{user.profile.userName}}</span></span>
+                        <h5 class="twitchName">Twitch Name: {{#if user.profile.twitch}}<a href="" class="theTwitchName">{{user.profile.twitch}}</a>{{else}}None{{/if}}</h5>
                     </div>
                 </div>
+                {{#if equals currentUser._id getParam}}
+
+                {{else}}
+                    <div class="btn btn-lg pull-right sendFriendRequest">Send Friend Request</div>
+                {{/if}}
             </div>
             {{#if equals currentUser._id getParam}}
                 <div class="user-info-change hidden">

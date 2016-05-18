@@ -10,8 +10,12 @@
             <div class="col-lg-3">
                 <h2>League Of Legends</h2>
             </div>
-            <div class="col-lg-3 pull-right top-menu-nav">
+            <div class="col-lg-4 pull-right top-menu-nav">
+
                 {{>TopMenu}}
+                <div class="searchInputDiv">
+                    <input type="text" id="searchInput" class="searchInput typeahead form-control" name="userName" placeholder="User Search" autocomplete="off" spellcheck="off" data-source="userNames">
+                </div>
             </div>
         </div>
         <div class="col-lg-2 pull-right testFriendsList">

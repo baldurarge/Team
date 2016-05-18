@@ -19,6 +19,10 @@ Template.UserPage.helpers({
     }
 });
 
+Template.UserPage.events({
+
+});
+
 UI.registerHelper('getEmail',function(user){
     return user.emails[0].address;
 });
@@ -33,16 +37,10 @@ UI.registerHelper('getParam',function(){
 
 Template.UserPage.events({
     'click .change-info-tab':function(){
-        $('.user-info').addClass('hidden');
-        $('.user-info-change').removeClass('hidden');
-        $('.user-info-tab').removeClass('active');
-        $('.change-info-tab').addClass('active');
+        changeView(1);
     },
     'click .user-info-tab':function(){
-        $('.user-info').removeClass('hidden');
-        $('.user-info-change').addClass('hidden');
-        $('.user-info-tab').addClass('active');
-        $('.change-info-tab').removeClass('active');
+        changeView(2);
     },
     'click .button-save-changes':function(event, template){
         event.preventDefault();
@@ -62,21 +60,28 @@ Template.UserPage.events({
             }
         });
         Meteor.call('updateUser', info);
+        changeView(2);
         
-    },
-    'click .friendRequestBtn': function(){
-
-        Meteor.call('addFriend',this._id);
-        //Meteor.call('insertPrufa',Meteor.user()._id);
-    },
-    'click .acceptFriendRequest':function(){
-        Meteor.call('acceptFriend',this._id);
-    },
-    'click .declineFriendRequest':function(){
-        Meteor.call('declineFriend', this._id);
+    },'click .sendFriendRequest':function () {
+        var id = FlowRouter.getParam('id');
+        Meteor.call('addFriend', id);
     }
 });
 
 UI.registerHelper('equals',function(a,b){
     return a === b;
 });
+
+var changeView = function (state) {
+    if(state == 1){
+        $('.user-info').addClass('hidden');
+        $('.user-info-change').removeClass('hidden');
+        $('.user-info-tab').removeClass('active');
+        $('.change-info-tab').addClass('active');
+    }else{
+        $('.user-info').removeClass('hidden');
+        $('.user-info-change').addClass('hidden');
+        $('.user-info-tab').addClass('active');
+        $('.change-info-tab').removeClass('active');
+    }
+};

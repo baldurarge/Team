@@ -1,3 +1,8 @@
+Template.MainLayout.onCreated(function () {
+   Meteor.subscribe("directory");
+});
+
+
 Template.MainLayout.onRendered(function(){
     var trigger = $('.hamburger'),
         liTrigger = $('.side-li'),
@@ -31,4 +36,23 @@ Template.MainLayout.onRendered(function(){
     $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
     });
+
+    Meteor.typeahead.inject();
+    $('.typeahead').bind('typeahead:select', function (ev, suggestion, user) {
+        var theuser = Meteor.users.findOne({"profile.userName":suggestion.value});
+        window.location.replace("/user/"+theuser._id);
+    });
+});
+
+Template.MainLayout.helpers({
+    userNames: function(){
+        return Meteor.users.find().fetch().map(function(user){
+            return user.profile.userName;
+        });
+    }
+});
+
+Template.MainLayout.events({
+    'typeahead:autocompleted':function(e){
+    }
 });

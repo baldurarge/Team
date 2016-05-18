@@ -1,6 +1,7 @@
 Template.TopMenu.onCreated(function(){
     var self = this;
     friendListOpen = true;
+    searchOpen = false;
     self.autorun(function(){
         self.subscribe("notifications");
     });
@@ -16,7 +17,13 @@ Template.TopMenu.helpers({
 Template.TopMenu.events({
     'click .acceptGameInvite':function(){
         //console.log(this.senderId);
-        Meteor.call('acceptInvite',this.senderId);
+        Meteor.call('acceptInvite',this._lobbyId);
+    },
+    'click .deleteNotification':function () {
+      Meteor.call('deleteNotification',this._id);
+    },
+    'click .profile-button':function () {
+      FlowRouter.go('/user/'+Meteor.userId());
     },
     'click .friends-button':function(){
         if(friendListOpen){
@@ -28,6 +35,10 @@ Template.TopMenu.events({
             $('.testFriendsList').show(200);
             friendListOpen = true;
         }
+    },
+    'click .logout':function(event){
+        event.preventDefault();
+        Meteor.logout();
     }
 });
 

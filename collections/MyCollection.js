@@ -33,6 +33,7 @@ Meteor.methods({
                 }
             }
         });
+        
     },
     acceptFriend:function(friendID){
         //var user = Meteor.users.find({$and:[{_id:friendID},{"friendsList.id":this.userId}]}).fetch();
@@ -44,6 +45,14 @@ Meteor.methods({
         Meteor.users.update({'_id':friendID,'friendsList.id':this.userId},{$set:{'friendsList.$.status':''}});
         Meteor.users.update({'_id':this.userId,'friendsList.id':friendID},{$set:{'friendsList.$.status':''}});
         return {succes:true};
+    },
+    createNotification:function(senderID,reciverId,message,type){
+
+    },
+
+
+    deleteNotification:function (id) {
+        Notifications.remove({_id:id});
     }
 });
 

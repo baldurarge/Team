@@ -1,16 +1,27 @@
 <template name="TopMenu">
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="" title="Search"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
-        <li class="dropdown">
-            <a title="Notifications" href="" id="dLabel" data-target="droppedDown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o fa-2x"></i></a>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                {{#each notifications}}
-                    <li>{{textToShow this.type}} {{this.senderId}} <a href="" class="{{classToShow this.type}}">Accept Game Invite</a></li>
-                {{/each}}
-            </ul>
-        </li>
-        <li class="friends-button"><a href="" title="Friends"><i class="fa fa-users fa-2x" aria-hidden="true"></i></a></li>
-        <li><a href="/user/{{currentUser._id}}" title="User Profile"><i class="fa fa-user fa-2x"></i></a></li>
-        {{>Logout}}
-    </ul>
+    {{#if Template.subscriptionsReady}}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown navSelect">
+                <i title="Notifications" href="" id="dLabel" data-target="droppedDown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o fa-2x"></i></i>
+                <ul class="dropdown-menu notifications" aria-labelledby="dLabel">
+                    {{#each notifications}}
+                        <li class="eachNotification">
+                            {{#if this.type equals 2}}
+                                {{textToShow this.type}} {{this.senderId}}
+                                <a href="" class="{{classToShow this.type}}">Accept</a>
+                                <a href="" class="deleteNotification">x</a>
+                            {{else}}
+                                s
+                            {{/if}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+            <li class="friends-button navSelect"><i href="" title="Friends"><i class="fa fa-users fa-2x" aria-hidden="true"></i></i></li>
+            <li class="profile-button navSelect"><i href="/user/{{currentUser._id}}" title="User Profile"><i class="fa fa-user fa-2x"></i></i></li>
+            <li class="logout navSelect">
+                <i title="Logout!" href=""><i class="fa fa-sign-out fa-2x"></i></i>
+            </li>
+        </ul>
+    {{/if}}
     </template>
