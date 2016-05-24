@@ -1,16 +1,16 @@
 Template.TopMenu.onCreated(function(){
-    var self = this;
-    friendListOpen = true;
-    searchOpen = false;
-    self.autorun(function(){
-        self.subscribe("notifications");
-    });
+    Meteor.subscribe("notifications");
 });
 
 
 Template.TopMenu.helpers({
-        notifications:()=>{
-        return Notifications.find({});
+        notifications:function(){
+        var n = Notifications.find({}).fetch();
+            if(n){
+                return n;
+            }else{
+                return [];
+            }
     }
 });
 
@@ -26,14 +26,19 @@ Template.TopMenu.events({
       FlowRouter.go('/user/'+Meteor.userId());
     },
     'click .friends-button':function(){
-        if(friendListOpen){
-            //$('.testFriendsList').addClass("hidden");
+        if($('.testFriendsList').is(":visible")){
             $('.testFriendsList').hide(200);
-            friendListOpen = false;
         }else{
-            //$('.testFriendsList').removeClass("hidden");
+            $('.notificationsDiv').hide(0);
             $('.testFriendsList').show(200);
-            friendListOpen = true;
+        }
+    },
+    'click .notifications-button':function () {
+        if($('.notificationsDiv').is(":visible")){
+            $('.notificationsDiv').hide(200);
+        }else{
+            $('.testFriendsList').hide(0);
+            $('.notificationsDiv').show(200);
         }
     },
     'click .logout':function(event){
@@ -56,12 +61,19 @@ UI.registerHelper('textToShow',function(a){
     }
 });
 
-UI.registerHelper('classToShow',function(a){
-    if(a == 1){
-        return "hidden:";
-    }else if(a == 2){
-        return "acceptGameInvite";
+UI.registerHelper('classToShow',function(not){
+    if(not.length >= 1){
+        return "therIsNotification";
     }else{
-        return "hidden";
+        return "";
     }
+});
+
+UI.registerHelper('howManyNotif',function (noti) {
+    var length = noti.length;
+   if(noti.length > 0){
+        return length.toString();
+   }else{
+       return "";
+   }
 });

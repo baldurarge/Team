@@ -1,9 +1,3 @@
-UI.registerHelper('isItAFriend',function(id){
-    var friend = Meteor.users.find({_id:id}).fetch();
-    return "ASDASd";
-});
-
-
 Template.UserPage.onCreated(function(){
     var self = this;
     self.autorun(function(){
@@ -19,10 +13,6 @@ Template.UserPage.helpers({
     }
 });
 
-Template.UserPage.events({
-
-});
-
 UI.registerHelper('getEmail',function(user){
     return user.emails[0].address;
 });
@@ -34,6 +24,24 @@ UI.registerHelper('isEmailVerified',function(user){
 UI.registerHelper('getParam',function(){
     return FlowRouter.getParam('id');
 });
+
+UI.registerHelper('getFriendStatus',function(){
+    //var user = Meteor.users.find({_id:Meteor.userId()});
+    //console.log(userId);
+    return 1;
+});
+
+UI.registerHelper('isItAFriend',function(){
+    var id = FlowRouter.getParam('id');
+    var friendList = Meteor.user();
+    friendList = friendList.friendsList;
+    if(friendList == undefined){
+        return false;
+    }else{
+        return true;
+    }
+});
+
 
 Template.UserPage.events({
     'click .change-info-tab':function(){
@@ -65,6 +73,9 @@ Template.UserPage.events({
     },'click .sendFriendRequest':function () {
         var id = FlowRouter.getParam('id');
         Meteor.call('addFriend', id);
+    },'click .acceptFriendButton':function () {
+        var id = FlowRouter.getParam('id');
+        Meteor.call('acceptFriend',id,"NONE");
     }
 });
 

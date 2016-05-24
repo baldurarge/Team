@@ -12,5 +12,5 @@ Meteor.publish("lobbys",function(){
 });
 
 Meteor.publish("notifications",function(){
-   return Notifications.find({userId:this.userId});
+   return Notifications.find({reciverId:this.userId});
 });

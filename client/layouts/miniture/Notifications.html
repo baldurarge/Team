@@ -1,0 +1,45 @@
+<template name="Notifications">
+    {{#each notifications}}
+        {{#if equals type 2}}
+            <div class="card">
+                <div class="card-header">Game Invite</div>
+                <div class="card-block">
+                    <p class="card-text"><span class="senderName">{{getNameFromId senderId}}</span> sent invite for {{content.theGame}}</p>
+                </div>
+                <div class="card-footer">Accept</div>
+            </div>
+        {{/if}}
+        {{#if equals type 1}}
+            <div class="card">
+                <div class="card-header">Friend Request</div>
+                <div class="card-block">
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        {{/if}}
+    {{else}}
+        <h4 class="text-center">No Notifications</h4>
+    {{/each}}
+    <ul class="notifications" aria-labelledby="dLabel">
+        {{#each notifications}}
+            <li class="eachNotification">
+                {{#if equals type 2}}
+                    <div class="card">
+                        <div class="card-header">Game Invite</div>
+                        <div class="card-block">
+                            <p class="card-text"><span class="senderName">{{getNameFromId senderId}}</span> sent invite for {{content.theGame}}</p>
+                        </div>
+                    </div>
+                {{/if}}
+                {{#if equals type 1}}
+                    <span class="friendNotification col-lg-12">Friend Request From</span>
+                    <a href="/user/{{senderId}}" class="col-lg-12">{{getNameFromId senderId}}</a>
+                    <div class="btn col-lg-5 acceptFriendsRequestBtn">Accept</div>
+                    <div class="btn col-lg-5 col-lg-offset-2">Decline</div>
+                {{/if}}
+            </li>
+        {{else}}
+            <h4 class="text-center">No Notifications</h4>
+        {{/each}}
+    </ul>
+</template>

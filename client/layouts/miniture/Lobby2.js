@@ -15,7 +15,9 @@ Template.Lobby2.events({
     'click .createALobby': function(){
         var theGame = FlowRouter.getParam('id');
         Meteor.call('createLobby',theGame);
-    },'click .leaveLobby':function () {
+    },
+    
+    'click .leaveLobby':function () {
         var lob = Lobbys.findOne({users:Meteor.userId()});
         lobUsers = lob.users;
         if(lobUsers.length<=1){
@@ -24,13 +26,15 @@ Template.Lobby2.events({
             Meteor.call('leaveLobby',lob._id, Meteor.userId());
         }
     },
+    
     'click .send-invites':function(event, template){
         event.preventDefault();
         var select = template.findAll("input[type=checkbox]:checked");
         var selectArray = _.map(select,function(item){
             return item.defaultValue;
         });
-        Meteor.call('sendInvites',selectArray)
+        var theGame = FlowRouter.getParam('id');
+        Meteor.call('sendInvites',selectArray,theGame)
     }
 });
 

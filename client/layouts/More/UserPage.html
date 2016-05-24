@@ -13,15 +13,19 @@
                         <img class="media-object dp img-circle" src="{{user.profile.imgLoc}}" style="width: 100px;height:100px;">
                     </div>
                     <div class="media-body">
-                        <span class="name">Name: <span class="theName">{{user.profile.fName}} {{user.profile.lName}}</span></span>
-                        <span class="username">Username: <span class="theUserName">{{user.profile.userName}}</span></span>
-                        <h5 class="twitchName">Twitch Name: {{#if user.profile.twitch}}<a href="" class="theTwitchName">{{user.profile.twitch}}</a>{{else}}None{{/if}}</h5>
+                        <span class="name col-lg-12">Name: <span class="theName">{{user.profile.fName}} {{user.profile.lName}}</span></span>
+                        <span class="username col-lg-12">Username: <span class="theUserName">{{user.profile.userName}}</span></span>
+                        <h5 class="twitchName col-lg-12">Twitch Name: {{#if user.profile.twitch}}<a href="" class="theTwitchName">{{user.profile.twitch}}</a>{{else}}None{{/if}}</h5>
                     </div>
                 </div>
                 {{#if equals currentUser._id getParam}}
 
                 {{else}}
-                    <div class="btn btn-lg pull-right sendFriendRequest">Send Friend Request</div>
+                    {{#if isItAFriend}}
+                        <div class="btn btn-lg pull-right acceptFriendButton">Accept</div>
+                    {{else}}
+                        <div class="btn btn-lg pull-right sendFriendRequest">Send Friend Request</div>
+                    {{/if}}
                 {{/if}}
             </div>
             {{#if equals currentUser._id getParam}}
