@@ -80,8 +80,8 @@ $side-nav-large = 200px
 
 
 
-html
-    box-sizing: border-box
+
+
 
 *, *:before, *:after
     box-sizing: inherit
@@ -105,18 +105,17 @@ html
 .form-login .btn
     background-color sky
 
-
-.mainLayoutContent
-    margin 0px
-    padding 0px
 /*----------------------------------HOME*/
+
 .TopNavBar
+    position: absolute;
     background-color #14a29e
     color white
     box-shadow: 0px 3px 5px #888888;
     font-family: cool
     z-index 100
-
+    margin-top 0px !important
+    height 70px
 
 .nav .navSelect
     margin-top 10px !important
@@ -156,3 +155,8 @@ html
 .thereNotification
     background-color #f25f5c
     color white
+
+.topBarPadding
+    margin-top 30px
+
+

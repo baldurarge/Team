@@ -1,0 +1,113 @@
+
+
+.btn-circle.btn-xl {
+  font-family: cool
+  width: 200px;
+  height: 200px;
+  font-size: 44px;
+  border-radius: 200px;
+  margin 10px
+}
+
+@media only screen and (max-width: 3000px) {
+  .btn-circle.btn-xl {
+    width: 300px;
+    height: 300px;
+    font-size: 64px;
+    border-radius: 200px;
+    margin 10px
+  }
+  .btn-lol{
+    font-size 30px !important;
+    color white;
+  }
+  .btn-cs{
+    font-size 30px !important;
+    color white;
+  }
+  .btn-other{
+    font-size 30px !important;
+    color white;
+    background-color cornflowerblue !important
+  }
+  .btn-lol:hover{
+    font-size 33px !important;
+    color white;
+  }
+  .btn-cs:hover{
+    font-size 34px !important;
+    color white;
+  }
+  .btn-other:hover{
+    font-size 34px !important;
+    color white;
+    background-color #6aa2ff !important
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .btn-circle.btn-xl {
+    width: 250px;
+    height: 250px;
+    font-size: 54px;
+    border-radius: 200px;
+    margin-right 10px
+  }
+  .btn-circle.btn-xl:hover {
+    width: 250px;
+    height: 250px;
+    font-size: 74px;
+    border-radius: 200px;
+    margin-right 10px
+  }
+  .btn-lol{
+    font-size 26px !important;
+    color white;
+  }
+  .btn-cs{
+    font-size 26px !important;
+    color white;
+  }
+  .btn-other{
+    font-size 26px !important;
+    color white;
+    background-color cornflowerblue !important
+  }
+  .btn-lol:hover{
+    font-size 28px !important;
+    color white;
+  }
+  .btn-cs:hover{
+    font-size 29px !important;
+    color white;
+  }
+  .btn-other:hover{
+    font-size 29px !important;
+    color white;
+    background-color #6aa2ff !important
+  }
+}
+
+.tester
+  margin-top 5%
+
+.btn-game, .btn-lol
+  background mediumpurple
+
+.btn-game:hover, .btn-lol:hover
+  background-color #a47ff2
+  box-shadow: 1px 1px 20px #888888;
+
+.btn-media, .btn-cs
+  background orangered
+
+.btn-media:hover, .btn-cs:hover
+  background #ff5a00
+  box-shadow: 1px 1px 20px #888888;
+
+.btn-stream, .btn-other
+  background #f4ee01
+
+.btn-stream:hover, .btn-other:hover
+  background #fffd00
+  box-shadow: 1px 1px 20px #888888;

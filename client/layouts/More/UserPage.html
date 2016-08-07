@@ -1,136 +1,305 @@
 <template name="UserPage">
-    <div class="col-lg-9 col-lg-offset-1 the-user-info">
         {{#if Template.subscriptionsReady}}
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="active user-info-tab"><a href="">User Info</a></li>
-                {{#if equals currentUser._id getParam}}
-                    <li role="presentation" class="change-info-tab"><a href="">Change Info</a></li>
-                {{/if}}
-            </ul>
-            <div class="user-info col-lg-6">
-                <div class="media">
-                    <div class="pull-left" href="#">
-                        <img class="media-object dp img-circle" src="{{user.profile.imgLoc}}" style="width: 100px;height:100px;">
-                    </div>
-                    <div class="media-body">
-                        <span class="name col-lg-12">Name: <span class="theName">{{user.profile.fName}} {{user.profile.lName}}</span></span>
-                        <span class="username col-lg-12">Username: <span class="theUserName">{{user.profile.userName}}</span></span>
-                        <h5 class="twitchName col-lg-12">Twitch Name: {{#if user.profile.twitch}}<a href="" class="theTwitchName">{{user.profile.twitch}}</a>{{else}}None{{/if}}</h5>
-                    </div>
-                </div>
-                {{#if equals currentUser._id getParam}}
+                {{#if equals you getParam}}
+                    <div class="user-good-wipes small-7 medium-7 columns">
+                        <h3 class="text-center">User Info</h3>
+                        <div class="row">
+                            <div class="small-9 columns">
+                                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="right-label">First Name</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <div class="row collapse">
+                                            {{#if changeSome.fName}}
+                                                <div class="small-10 columns">
+                                                    <input type="text" placeholder="{{user.profile.fName}}" class="changeFNameInput">
+                                                </div>
 
-                {{else}}
-                    {{#if isItAFriend}}
-                        <div class="btn btn-lg pull-right acceptFriendButton">Accept</div>
-                    {{else}}
-                        <div class="btn btn-lg pull-right sendFriendRequest">Send Friend Request</div>
-                    {{/if}}
-                {{/if}}
-            </div>
-            {{#if equals currentUser._id getParam}}
-                <div class="user-info-change hidden">
-                    <div class="col-lg-6">
-                        <h5>User Info</h5>
-                        <div class="panel panel-default user-info-change-panel">
-                            <div class="panel-body">
-                                <form action="">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">User Name</label>
-                                        <div class="col-sm-9">
-                                            <input id="update-user-name" type="text" placeholder="{{user.profile.userName}}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">First Name</label>
-                                        <div class="col-sm-9">
-                                            <input id="update-first-name" type="text" placeholder="{{user.profile.fName}}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">Last Name</label>
-                                        <div class="col-sm-9">
-                                            <input id="update-last-name" type="text" placeholder="{{user.profile.lName}}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">Image Link</label>
-                                        <div class="col-sm-9">
-                                            <input id="update-image-link" type="text" placeholder="New Image Link" class="form-control">
-                                        </div>
-                                    </div>
-                                    <hr class="col-lg-11">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">Email</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" placeholder="{{getEmail user}}" class="form-control" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="textinput">Email Verified</label>
-                                        <div class="col-sm-9 email-verified">
-                                            {{#if isEmailVerified user}}
-                                                <input type="text" placeholder="Verified" class="form-control is-verified" disabled>
                                             {{else}}
-                                                <input type="text" placeholder="Not Verified" class="form-control not-verified">
+                                                <div class="small-11 columns">
+                                                    <input type="text" placeholder="{{user.profile.fName}}" disabled="true">
+                                                </div>
+                                            {{/if}}
+
+                                            {{#if changeSome.fName}}
+                                                <div class="small-2 columns">
+                                                    <ul class="button-group even-2">
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-fName-save">
+                                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-fName-close">
+                                                                <i class="fa fa-close" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            {{else}}
+                                                <div class="small-1 columns">
+                                                    <a href="#" class="button postfix btn-fName-change">
+                                                        <i class="fa fa-pencil edit-input-button" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
                                             {{/if}}
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="right-label">Last Name</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <div class="row collapse">
+                                            {{#if changeSome.lName}}
+                                                <div class="small-10 columns">
+                                                    <input type="text" placeholder="{{user.profile.lName}}" class="changeLNameInput">
+                                                </div>
+
+                                            {{else}}
+                                                <div class="small-11 columns">
+                                                    <input type="text" placeholder="{{user.profile.lName}}" disabled="true">
+                                                </div>
+                                            {{/if}}
+
+                                            {{#if changeSome.lName}}
+                                                <div class="small-2 columns">
+                                                    <ul class="button-group even-2">
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-lName-save">
+                                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-lName-close">
+                                                                <i class="fa fa-close" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            {{else}}
+                                                <div class="small-1 columns">
+                                                    <a href="#" class="button postfix btn-lName-change">
+                                                        <i class="fa fa-pencil edit-input-button" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="right-label">User Name</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <div class="row collapse">
+                                            {{#if changeSome.userName}}
+                                                <div class="small-10 columns">
+                                                    <input type="text" placeholder="{{user.profile.userName}}" class="changeUserNameInput">
+                                                </div>
+
+                                            {{else}}
+                                                <div class="small-11 columns">
+                                                    <input type="text" placeholder="{{user.profile.userName}}" disabled="true">
+                                                </div>
+                                            {{/if}}
+
+                                            {{#if changeSome.userName}}
+                                                <div class="small-2 columns">
+                                                    <ul class="button-group even-2">
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-userName-save">
+                                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-userName-close">
+                                                                <i class="fa fa-close" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            {{else}}
+                                                <div class="small-1 columns">
+                                                    <a href="#" class="button postfix btn-userName-change">
+                                                        <i class="fa fa-pencil edit-input-button" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="">Twitch Name</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <div class="row collapse">
+                                            {{#if changeSome.twitchName}}
+                                                <div class="small-10 columns">
+                                                    <input type="text" placeholder="{{user.profile.twitchName}}" class="changeTwitchNameInput">
+                                                </div>
+
+                                            {{else}}
+                                                <div class="small-11 columns">
+                                                    <input type="text" placeholder="{{user.profile.twitchName}}" disabled="true">
+                                                </div>
+                                            {{/if}}
+
+                                            {{#if changeSome.twitchName}}
+                                                <div class="small-2 columns">
+                                                    <ul class="button-group even-2">
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-twitchName-save">
+                                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="button postfix btn-twitchName-close">
+                                                                <i class="fa fa-close" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            {{else}}
+                                                <div class="small-1 columns">
+                                                    <a href="#" class="button postfix btn-twitchName-change">
+                                                        <i class="fa fa-pencil edit-input-button" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-3 columns">
+                                        <label for="">Email Address</label>
+                                    </div>
+                                    <div class="small-9 columns">
+                                        <div class="row collapse">
+                                            <div class="small-12 columns">
+                                                <input type="text" placeholder="{{email.address}}" disabled="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-3 columns">
+                                <img src="/Avatars/{{user.profile.imgLoc}}" alt="">
+                            </div>
+                            <div class="small-3 columns text-center changeAvatar">
+                                <a href="#" class="button small round btn-avatar" >Change Avatar</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-5 col-lg-offset-1">
-                        <h5>Password Change</h5>
-                        <div class="panel panel-default user-info-change-panel">
-                            <div class="panel-body">
-                                <form action="">
-                                    <div class="form-group">
-                                        <label for="old-password" class="col-lg-5">Old Password</label>
-                                        <div class="col-lg-7">
-                                            <input id="update-old-password" type="password" class="form-control" placeholder="Old Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="old-password" class="col-lg-5">New Password</label>
-                                        <div class="col-lg-7">
-                                            <input id="update-password" type="password" class="form-control" placeholder="New Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="old-password" class="col-lg-5">New Password Again</label>
-                                        <div class="col-lg-7">
-                                            <input id="update-password-again" type="password" class="form-control" placeholder="New Password Again">
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                        <h5>Additional Info</h5>
-                        <div class="panel panel-default user-info-change-panel">
-                            <div class="panel-body">
-                                <form action="">
-                                    <div class="form-group">
-                                        <label for="old-password" class="col-lg-5">Twitch Name</label>
-                                        <div class="col-lg-7">
-                                            <input id="update-twitch" type="text" class="form-control" placeholder="Twitch">
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
+                        <div class="small-3 columns right logout-btn-div">
+                            <a href="/logout" class="button right small round btn-logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <hr>
-                        <div class="btn btn-lg pull-right">Cancel</div>
-                        <div class="btn btn-lg pull-right button-save-changes">Save Changes</div>
+                {{else}}
+                    <div class="user-good-wipes small-5 medium-5 small-offset-3 columns">
+                        <h3 class="text-center">{{user.profile.fName}} {{user.profile.lName}}</h3>
+                        <div class="around-image text-center small-centered medium-centered columns">
+                            <img src="/Avatars/{{user.profile.imgLoc}}" alt="" class="little-smile">
+                        </div>
+                         <h4 class="text-center userName">{{user.profile.userName}}</h4>
+                        <h4 class="text-center joinedDate">Joined {{joinedDate}}</h4>
+                            <div class="sendFriendRequest text-center">
+                                {{#if isItAFriend}}
+                                    {{#if equals friendStatus 10}}
+                                        <h1>Friends</h1>
+                                    {{/if}}
+                                    {{#if equals friendStatus 0}}
+                                        <span class="label"><h3>Friend Request Sent</h3></span>
+                                    {{/if}}
+                                    {{#if equals friendStatus 1}}
+                                        <ul class="button-group round">
+                                            <li>
+                                                <a href="#" class="button round text-center acceptFriendRequest-btn success">Accept Friend Request</a>
+                                            </li>
+                                            <li class="decline-li"><a href="#" class="button warning declineFriendRequest-btn">X</a></li>
+                                        </ul>
+                                    {{/if}}
+                                    {{#if equals friendStatus 99}}
+                                            <a href="#" class="button round text-center sendFriendRequest-btn">Send Friend Request</a>
+                                        {{/if}}
+                                    {{else}}
+                                    <a href="#" class="button round text-center sendFriendRequest-btn">Send Friend Request</a>
+                                {{/if}}
+                            </div>
+                        </div>
+                {{/if}}
+
+
+
+                {{#if equals you getParam}}
+                    <div class="user-friends user-good-wipes small-3 medium-3 small-offset-1 end columns">
+                        <h4 class="text-center">Friends List</h4>
+                        <div class="small-12 medium-12 columns theFriends" id="theFriends">
+                            {{#each user.friendsList}}
+                                <div class="eachFriend">
+                                    <div class="friendImage small-2 columns">
+                                        <img src="/Avatars/{{getImageFromId id}}" alt="">
+                                    </div>
+                                    <div class="small-10 columns">
+                                        <div class="small-12 columns">
+                                            <h5 class="friendName">{{getNameFromId id}}</h5>
+                                        </div>
+                                        <div class="small-12 columns">
+                                            {{#if equals status 10}}
+
+                                            {{else}}
+                                                <h5 class="status">
+                                                {{#if equals status 0}}
+                                                    <span class="label warning">Friend Request Sent</span>
+                                                {{else}}
+                                                    <span class="label success">Friend Request Recived</span>
+                                                {{/if}}
+                                                </h5>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="style-14">
+                            {{else}}
+                                <h5>You Have No Friends</h5>
+                            {{/each}}
+                        </div>
+                        <form class="large-12 columns friendSearchForm">
+                            <div class="row collapse">
+                                <div class="small-10 columns">
+                                    <input type="text" name="text" placeholder="Friend Search" class="friendSearchInput" autocomplete="off">
+                                </div>
+                                <div class="small-2 columns">
+                                    <a href="#" class="button postfix btn-friendSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                </div>
+
+
+                {{/if}}
             {{/if}}
-        {{/if}}
+</template>
+
+
+
+
+
+<template name="avatarGallery">
+    <div class="anti-modal-box">
+        <div class="anti-modal-body">
+            {{#each avatars}}
+               <div class="small-3 columns">
+                   <a class="avatar" href="">
+                       <img src="/Avatars/{{this}}">
+                   </a>
+               </div>
+            {{/each}}
+        </div>
     </div>
 </template>

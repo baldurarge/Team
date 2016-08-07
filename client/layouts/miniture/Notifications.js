@@ -21,6 +21,8 @@ Template.Notifications.helpers({
 Template.Notifications.events({
     'click .acceptFriendsRequestBtn':function () {
         Meteor.call('acceptFriend',this.senderId,this._id);
+    },'click .acceptGameInviteBtn':function () {
+        Meteor.call('acceptInvite', this.content._lobbyId, this._id);
     }
 });
 

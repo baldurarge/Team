@@ -1,10 +1,25 @@
 <template name="Login">
-    <div class="container text-center">
-        <form action="" class="form-login col-lg-4 col-lg-offset-4 col-sm-7 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-            <h1 class="form-signin-heading text-muted">Sign In</h1>
-            <input type="text" class="form-control" id="login-email" placeholder="Email" autofocus="">
-            <input type="password" class="form-control" id="login-password" placeholder="Password">
-            <input type="submit" value="Login" class="btn btn-block">
-        </form>
+    <div class="small-3 small-offset-4 loginDiv">
+        {{#if signUp}}
+            <form action="" class="form-signUp">
+                <h2 class="form-signin-heading text-muted text-center">Sign Up</h2>
+                <input type="text" class="form-control" id="signUp-email" placeholder="Email" autofocus="" required="true">
+                <input type="password" class="form-control" id="signUp-password" placeholder="Password" required="true">
+                <input type="password" class="form-control" id="signUp-password-again" placeholder="Password" required="true">
+                <input type="text" class="form-control" id="signUp-userName" placeholder="User Name" required="true">
+                <input type="text" class="form-control" id="signUp-fName" placeholder="First Name" required="true">
+                <input type="text" class="form-control" id="signUp-lName" placeholder="Last Name" required="true">
+                <button class="button expand btn-signUp" type="submit">Sign Up</button>
+                <a href="#" class="button small expand btn-signUp-close">Already a user, Sign In!</a>
+            </form>
+        {{else}}
+            <form action="" class="form-login">
+                <h2 class="form-signin-heading text-muted text-center">Sign In</h2>
+                <input type="text" class="form-control" id="login-email" placeholder="Email" autofocus="">
+                <input type="password" class="form-control" id="login-password" placeholder="Password">
+                <button class="button expand btn-login" type="submit">Sign In</button>
+                <a href="#" class="button small expand btn-signUp-open">New user, Sign up!</a>
+            </form>
+        {{/if}}
     </div>
 </template>

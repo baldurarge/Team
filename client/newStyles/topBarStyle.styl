@@ -1,0 +1,122 @@
+col1 = #3e1e68
+col2 = #583c87
+col3 = #e45a84
+col4 = #ffacac
+col5 = #ff5722
+col6 = #995ee6
+
+
+.top-bar
+  background col1
+  color black !important
+  height 50px
+  z-index 1
+
+.top-bar-section2
+  margin-right 30px
+
+.top-bar-section2 .right li a
+  font-size 30px
+  color white
+  margin-right 10px
+
+.top-bar-section2 .right li .selected
+  color col5
+
+/*.topBarDropDown
+  position absolute
+  z-index 1000
+  right 0
+  top 0
+  width 200px
+  height 400px
+  margin-top 52px
+  background white
+  border-bottom-left-radius 20px
+  -webkit-box-shadow: -22px 22px 81px -17px rgba(128,128,128,0.91);
+  -moz-box-shadow: -22px 22px 81px -17px rgba(128,128,128,0.91);
+  box-shadow: -22px 22px 81px -17px rgba(128,128,128,0.91);
+  overflow auto
+*/
+
+
+
+.arrow_box {
+  right 0
+  top 0
+  margin-top 70px
+  margin-right 37px
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid col6 /*set border colour here*/
+  width: 350px;
+  height: 400px;
+  border-radius 5px
+  -webkit-filter: drop-shadow(0 1px 10px rgba(62, 30, 104,0.8)); /*set shadow colour  and size here*/
+  -moz-box-shadow: 0 1px 10px rgba(62, 30, 104,0.8);
+  filter: drop-shadow(0 1px 10px rgba(62, 30, 104,0.8));
+}
+.arrow_box:after,
+.arrow_box:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 19px;
+  left: 80%;
+  margin-left: -19px;
+}
+.arrow_box:before
+  border-color: rgba(113, 158, 206, 0);
+  border-bottom-color: #719ECE;
+  border-width: 20px;
+  left: 80%;
+  margin-left: -20px;
+
+.not-content
+  width 100%
+  height 100%
+  padding-top 10px
+  padding-bottom 10px
+  padding-left 5px
+  padding-right 5px
+  overflow auto
+
+.eachNot:hover
+  cursor pointer
+  background rgba(214, 214, 214, 0.45)
+
+.not-cont-text p
+  font-size 15px
+  margin 0px
+
+
+
+.topBarDropDown ul
+  margin 0px
+
+.topBarDropDown a
+  font-size 20px
+  color col1
+  width 100%
+  margin-left 10px
+
+.topBarDropDown li:hover
+  background rgba(246, 246, 246, 1)
+  color white !important
+  cursor pointer
+
+.fa-bell
+  color #feff98
+
+.notification-li
+  color col5
+  font-size 20px

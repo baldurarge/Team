@@ -1,0 +1,92 @@
+BlazeLayout.setRoot('body');
+
+Template.MainLayout.onCreated(function () {
+   Meteor.subscribe("directory");
+    Session.set('sideBarToggle',false);
+});
+
+Meteor.startup(function () {
+
+    sAlert.config({
+        effect: '',
+        position: 'top-right',
+        timeout: 5000,
+        html: false,
+        onRouteClose: true,
+        stack: true,
+        // or you can pass an object:
+        // stack: {
+        //     spacing: 10 // in px
+        //     limit: 3 // when fourth alert appears all previous ones are cleared
+        // }
+        offset: 0, // in px - will be added to first alert (bottom or top - depends of the position in config)
+        beep: false,
+        // examples:
+        // beep: '/beep.mp3'  // or you can pass an object:
+        // beep: {
+        //     info: '/beep-info.mp3',
+        //     error: '/beep-error.mp3',
+        //     success: '/beep-success.mp3',
+        //     warning: '/beep-warning.mp3'
+        // }
+        onClose: _.noop //
+        // examples:
+        // onClose: function() {
+        //     /* Code here will be executed once the alert closes. */
+        // }
+    });
+
+});
+
+
+Template.MainLayout.onRendered(function(){
+    var trigger = $('.hamburger'),
+        liTrigger = $('.side-li'),
+        overlay = $('.overlay'),
+        isClosed = false;
+
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    liTrigger.click(function(){
+        $('#wrapper').toggleClass('toggled');
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+        if (isClosed == true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+});
+
+Template.MainLayout.helpers({
+    userNames: function(){
+        return Meteor.users.find().fetch().map(function(user){
+            return user.profile.userName;
+        });
+    },
+    sidebarToggle:function(){
+        return Session.get('sideBarToggle');
+    }
+});
+
+Template.MainLayout.events({
+    'click .rushmid-brand':function () {
+        FlowRouter.go('/home');
+    }
+});

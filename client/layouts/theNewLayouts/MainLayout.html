@@ -1,0 +1,13 @@
+<template name="MainLayout">
+        {{> sAlert}}
+    {{>TopBarX}}
+
+    <div class="small-1 columns">
+        {{>SideBarX}}
+    </div>
+    <div class="mainStuff small-11 medium-11 columns">
+        {{>Template.dynamic template=main}}
+    </div>
+
+</template>
+

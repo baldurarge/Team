@@ -1,0 +1,181 @@
+//fonts
+cool = 'Comfortaa', cursive;
+cool2 = 'Cabin', sans-serif;
+cartoon = 'Pacifico', cursive;
+
+.lobby-buttons
+  margin-top 1%
+  font-family: cool
+
+.lobby-each-buttons
+  font-size 26px !important;
+  width 150px
+  height 150px
+
+.lobby-each-buttons:hover
+  font-size 28px !important;
+  width 150px
+  height 150px
+  box-shadow: 1px 1px 10px #888888;
+
+.lobby-each-buttons:nth-child(odd)
+  background-color cornflowerblue
+  color white
+
+.lobby-each-buttons:nth-child(even)
+  background-color mediumpurple
+  color white
+
+
+/*------------------------LOBBY INFO-------------------*/
+.theLobby2, .theLobby2-chat
+  background #e4f9f5
+  font-family cool2
+  border-radius 0px
+  list-style none
+  padding 0px !important
+  box-shadow: 1px 1px 5px #888888;
+
+
+
+.theLobby2 .devider, .theLobby2-chat .devider
+  font-size 20px
+
+
+.eachLobbyPerson
+  text-align left !important
+  font-size 20px
+
+.eachLobbyPerson a
+  color #f25f5c
+  font-size 16px !important
+  margin-right 10px
+  margin-top 7px
+
+.eachLobbyPerson:nth-child(odd)
+  background #096d71
+  color white
+
+.eachLobbyPerson:nth-child(even)
+  background #11999e
+  color white
+
+
+.theLobby2 ul, .theLobby2 li
+  list-style none
+  padding 0px !important
+  margin 0px !important
+
+.theLobby2-chat
+  height 430px
+
+.theLobby2-chat .the-lobby-messages
+  height 340px
+  overflow auto
+
+.the-lobby-messages
+  text-align left
+
+.eachLobbyChat p
+  font-size 17px
+  margin-left 10px
+  margin-bottom 0px
+  color rgba(82, 82, 82, 0.68)
+
+.eachLobbyChat span
+  margin-left 10px
+
+.eachLobbyChat:nth-child(odd)
+  background #fbf8ff
+  color black
+
+.eachLobbyChat:nth-child(even)
+  background #e9efec
+  color black
+
+.eachLobbyChat:last-child
+   padding-bottom 15px !important
+
+.theLobby2-chat ul, .theLobby2-chat li
+  list-style none
+  padding 0px !important
+  margin 0px
+
+.lobbyChatInput
+  margin-top 10px
+
+
+
+
+.theLobby
+  font-family cool2
+  background-color rgba(195, 195, 229, 0.2)
+  border-bottom-left-radius 1px
+  box-shadow: 1px 1px 5px #888888;
+  list-style none
+  padding 0px
+
+.theLobby ul, .theLobby li
+  list-style none
+  padding 0px
+
+.theLobby li
+  margin-top 4px
+
+
+.theLobby span
+  font-size 20px
+  color #767775
+  //color black
+  text-decoration none
+  margin-bottom 0em
+
+.theLobby a
+  margin-right 10px
+  font-size 15px
+  color #f25f5c
+
+.lobbyPersonImage
+  width 40px
+  border-radius: 50%;
+  margin-left 10px
+  margin-right 10px
+  margin-top 5px
+
+.theLobby .devider
+  background-color rgba(195,195,229,0.2)
+  text-align center
+
+.theLobby hr
+  margin 3px
+
+.inviteFriends
+  margin-left 15px
+  font-size 16px !important
+  color #0e9795 !important
+
+
+
+
+
+.modal
+  font-family cool2
+
+.modal-header, .modal-footer
+  background #11c0be
+  color white
+
+.modal-title
+  color white
+
+.modalListGroup li
+  border-radius 0px !important
+
+
+.modal-footer h4
+  margin-bottom 4px !important
+
+.modal-footer h4:hover
+  cursor pointer
+  font-size 20px
+

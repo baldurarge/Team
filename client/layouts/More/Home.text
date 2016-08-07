@@ -1,0 +1,26 @@
+Template.Home.onCreated(function(){
+    var self = this;
+    self.autorun(function(){
+        self.subscribe("games");
+    });
+});
+
+// HELPERS
+Template.Home.helpers({
+    
+});
+
+Template.Home.events({
+    'click .each-friend':function(){
+        var user = Meteor.users.find({_id:this.id}).fetch();
+        FlowRouter.go('/user/'+user[0].profile.userName);
+    },'click .btn-game':function () {
+        FlowRouter.go('/games');
+    },'click .btn-stream':function () {
+        //FlowRouter.go('/streams');
+        Meteor.call('custumAlert','info','Sorry, but the streams section is still under construction... We are still in Alpha','top','5000',true,"59px", false);
+    },'click .btn-media':function () {
+        //FlowRouter.go('/media');
+        Meteor.call('custumAlert','info','Sorry, but the media section is still under construction... We are still in Alpha','top','5000',true,"59px", false);
+    }
+});
