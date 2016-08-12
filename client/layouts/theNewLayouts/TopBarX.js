@@ -27,6 +27,14 @@ Template.TopBarX.helpers({
             }
         }
         return s;
+    },
+    lobby:function () {
+        return Lobbys.findOne();
+    },
+    count:function () {
+        x = Lobbys.findOne();
+        y = {count:x.users.length,howMany:x.game.howManyInGame};
+        return y;
     }
 });
 
@@ -38,11 +46,19 @@ Template.TopBarX.events({
         FlowRouter.go('/login');
     },'click .eachNot':function (event, template) {
         event.preventDefault();
-        Meteor.call('seenNotification',this._id);
-        if(this.type == 1){
-            Session.set("showSettings",false);
+        Session.set("showSettings",false);
+        if(this.type === 1){
+            Meteor.call('seenNotification',this._id);
             FlowRouter.go('/user/'+this.senderId);
         }
-        console.log(this);
+        if(this.type === 2){
+            Meteor.call('seenNotification',this._id);
+            Meteor.call('acceptInvite',this.content._lobby,this._id);
+            FlowRouter.go('/games/'+this.content.Game._gameId);
+
+        }
+    },'click .lobby-li':function () {
+        var l = Lobbys.findOne();
+        FlowRouter.go('/games/'+l.gameId);
     }
 });

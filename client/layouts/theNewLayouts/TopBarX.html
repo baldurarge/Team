@@ -18,7 +18,12 @@
                         <ul class="right">
                             <li class="notification-li">{{#if equals howManyNotifications 0}} {{else}}{{howManyNotifications}}{{/if}}<a href="#" class="showSettings"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
                         </ul>
-                        {{else}}
+                        {{#if lobby}}
+                            <ul class="right">
+                                <li class="lobby-li"><span class="label warning lobby-label"><p>You´re In A Lobby</p>{{count.count}}/{{count.howMany}} - Status: geting ready</span></li>
+                            </ul>
+                        {{/if}}
+                    {{else}}
                         <ul class="right">
                             <li><a href="/login" class="login-button"><i class="fa fa-user-plus"></i></a></li>
                         </ul>
@@ -47,7 +52,7 @@
                                                 <img src="/Avatars/{{getImageFromId senderId}}" alt="">
                                             </div>
                                             <div class="small-9 columns not-cont-text">
-                                                <p>Game Invite - LOL <span class="label success">New</span></p>
+                                                <p>Game Invite -  {{content.Game._gameId}} <span class="label success">New</span></p>
                                                 From {{getNameFromId senderId}}
                                             </div>
                                         </div>

@@ -22,80 +22,75 @@
                             <div class="small-8 medium-8 columns lobbyName">
                                 <p>{{getNameFromId this}}</p>
                             </div>
-                            <div class="small-2 medum-2 columns lobbyExit">
-                                <i class="fa fa-times text-center" aria-hidden="true"></i>
-                            </div>
+                            {{#if equals user._id this}}
+                                <div class="small-2 medum-2 columns lobbyExit">
+                                    <i class="fa fa-times text-center" aria-hidden="true"></i>
+                                </div>
+                            {{else}}
+                                {{#if equals user._id lobby.lobbyLeader}}
+                                    <div class="small-2 medum-2 columns lobbyExit">
+                                        <i class="fa fa-times text-center" aria-hidden="true"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
                             <hr class="style14">
                         </div>
                     {{/each}}
                 </div>
 
-                <div class="small-2 medium-2 columns lobbyButtons text-center">
-                    <div class="button-group">
-                        <a href="" class="button">Start Looking!</a>
-                        <a href="" class="button invite-friends-btn">{{#if invite}}Back To Chat{{else}}Invite Friends{{/if}}</a>
+                {{#if equals userId lobby.lobbyLeader}}
+                    <div class="small-2 medium-2 columns lobbyButtons text-center">
+                        <div class="button-group">
+                            <a href="" class="button">Start Looking!</a>
+                            <a href="" class="button invite-friends-btn">{{#if lobby.showInvites}}Back To Chat{{else}}Invite Friends{{/if}}</a>
+                        </div>
                     </div>
-                </div>
+                {{/if}}
 
                 <div class="theLobbyChatAndInvite small-6 medium-6 columns">
-                    {{#if invite}}
-                        <div class="theLobbyInvite">
-                            {{#each user.friendsList}}
-                                {{#if equals status 10}}
-                                    <div class="eachUser eachInvite small-12 medium-12 columns">
-                                        <div class="small-2 medium-2 columns inviteImg">
-                                            <img src="/Avatars/{{getImgLink id}}" alt="" class="photo">
-                                        </div>
-                                        <div class="small-8 medium-8 columns lobbyName">
-                                            <p>{{getNameFromId id}}</p>
-
-                                        </div>
-                                        <div class="small-2 medum-2 columns lobbyExit">
-                                            <i class="fa fa-times text-center" aria-hidden="true"></i>
-                                        </div>
-                                        <hr class="style14">
-                                    </div>
+                    {{#if lobby.showInvites}}
+                        {{#if equals userId lobby.lobbyLeader}}
+                            <div class="theLobbyInvite">
+                                <h3 class="text-center">Invite Friends</h3>
+                                <hr class="style14">
+                                {{#each lobby.friends}}
+                                    {{#if equals friendId.status 10}}
+                                        {{#if getFriendState friendId.id}}
+                                            <div class="eachUser eachInvite small-12 medium-12 columns">
+                                                <div class="small-2 medium-2 columns inviteImg">
+                                                    <img src="/Avatars/{{getImgLink friendId.id}}" alt="" class="photo">
+                                                </div>
+                                                <div class="small-8 medium-8 columns lobbyName">
+                                                    <p>{{getNameFromId friendId.id}}</p>
+                                                </div>
+                                                {{#if checked}}
+                                                    <div class="small-2 medum-2 columns inviteButtonDiv checked text-center">
+                                                        <i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i>
+                                                    </div>
+                                                {{else}}
+                                                    <div class="small-2 medum-2 columns inviteButtonDiv text-center">
+                                                        <i class="fa fa-square-o fa-2x" aria-hidden="true"></i>
+                                                    </div>
+                                                {{/if}}
+                                            </div>
+                                            <hr class="style14">
+                                        {{/if}}
+                                    {{/if}}
                                 {{else}}
                                     <h3 class="text-center">Your Friends List Is Empty</h3>
-                                {{/if}}
-                            {{else}}
-                                <h3 class="text-center">Your Friends List Is Empty</h3>
-                            {{/each}}
+                                {{/each}}
+                            </div>
+                        {{else}}
+                            <div class="theLobbyChat">
+                                {{>LobbyChat}}
+                            </div>
+                        {{/if}}
+                        <div class="small-12 columns sendInvitesButtonDiv">
+                            <button>Send Invites</button>
                         </div>
                     {{else}}
                         <div class="theLobbyChat">
-                            <h3 class="text-center">Lobby Chat</h3>
-                            <hr class="style14">
-                            <div class="small-12 medium-12 columns theMessages" id="theMessages">
-                                {{#each lobby.messages}}
-                                    {{#if equals senderId userId}}
-                                        <div class="panel small-10 medium-10 columns">
-                                            {{message}}
-                                        </div>
-                                        <div class="small-2 medium-2 columns">
-                                            <span class="label round info">{{getNameFromId senderId}}</span>
-                                        </div>
-                                    {{else}}
-                                        <div class="small-2 medium-2 columns">
-                                            <span class="label round alert">{{getNameFromId senderId}}</span>
-                                        </div>
-                                         <div class="panel small-10 medium-10 columns">
-                                            {{message}}
-                                        </div>
-                                    {{/if}}
-                                {{/each}}
-                            </div>
-                            <form class="large-12 columns chatSendInput">
-                                <div class="row collapse">
-                                    <div class="small-11 columns">
-                                        <input type="text" name="text" placeholder="Message" class="chatInp">
-                                    </div>
-                                    <div class="small-1 columns">
-                                        <a href="#" class="button postfix submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
+                            {{>LobbyChat}}
                         </div>
                     {{/if}}
                 </div>
@@ -122,4 +117,43 @@
     </div>
 
     {{/if}}
+</template>
+
+<template name="LobbyChat">
+    <h3 class="text-center">Lobby Chat</h3>
+    <hr class="style14">
+    <div class="small-12 medium-12 columns theMessages" id="theMessages">
+        {{#each lobby.messages}}
+            {{#if equals senderId userId}}
+                <div class="small-12 columns">
+                    <div class="panel small-10 medium-10 columns">
+                        {{message}}
+                    </div>
+                    <div class="small-2 medium-2 columns">
+                        <span class="label round info">{{getNameFromId senderId}}</span>
+                    </div>
+                </div>
+            {{else}}
+                <div class="small-12 columns">
+                    <div class="small-2 medium-2 columns">
+                        <span class="label round alert">{{getNameFromId senderId}}</span>
+                    </div>
+                    <div class="panel small-10 medium-10 columns">
+                        {{message}}
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <form class="large-12 columns chatSendInput">
+        <div class="row collapse">
+            <div class="small-11 columns">
+                <input type="text" name="text" placeholder="Message" class="chatInp">
+            </div>
+            <div class="small-1 columns">
+                <a href="#" class="button postfix submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </form>
 </template>
